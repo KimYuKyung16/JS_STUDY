@@ -39,15 +39,18 @@
 
   * 단방향 연결리스트 형태
   <img width="100%" src="https://user-images.githubusercontent.com/81006438/222418142-e7587a06-46d7-4fe7-9383-cc8df25fdd2b.png" />
+
     > 한 노드에 데이터와 포인터가 있는데 이 포인터는 다음 값의 주소이다.
 
   * 단방향 연결리스트에서 데이터 추가
   <img width="100%" src="https://user-images.githubusercontent.com/81006438/222418144-0768eb7e-948b-4b46-b2ec-803c78daf8cb.png" />
+
     > 새로 추가하려는 위치에서 왼쪽에 있는 노드가 가리키는 주소값을 바꾼다.  
     새로 추가하는 노드에서도 가리키는 주소값을 다음 노드로 설정한다.
 
   * 단방향 연결리스트에서 데이터 삭제
   <img width="100%" src="https://user-images.githubusercontent.com/81006438/222418130-9dec3f67-9603-4aae-8df7-861ca31f1229.png" />
+  
     > 삭제하려는 노드와의 양 옆 연결을 제거한다.  
     이전 노드가 가리키는 주소가 삭제할 노드를 가리키게 하지 않고 그 다음 노드를 가리키도록 바꿔준다. 
 
