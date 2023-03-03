@@ -77,9 +77,9 @@ stack.pop(); // 3
 
 # :star:특징
 
-<img width="100%" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FoDQle%2FbtqyQL30Bq4%2FTiw0oIqWsrDb19ukJVvLD0%2Fimg.jpg" />
-
 ### 1.선입선출("FIFO"): 가장 최근에 들어온 것이 제일 먼저 삭제된다.
+
+<img width="100%" src="https://velog.velcdn.com/images%2Fjxlhe46%2Fpost%2F782c85d3-a291-4d41-bb62-9267ecdc1f09%2Fimage.png" />
 
 ## :star:종류
 
