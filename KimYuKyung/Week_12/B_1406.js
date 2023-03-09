@@ -22,7 +22,7 @@ function solution(string, commands) {
     } else if (commands[i] === 'D') { // 커서를 오른쪽으로 한 칸 옮김.
       if (string2.length) string1.push(string2.pop()); //오른쪽 영역에서 하나를 뺴서 왼쪽 영역에 추가
     } else if (commands[i] === 'B') { // 왼쪽에 있는 문자 삭제
-      if (string1.length) string1.pop(); // 왼족 영역에서 하나 pop
+      if (string1.length) string1.pop(); // 왼쪽 영역에서 하나 pop
     } else { // P $ 일 경우: $ 커서 왼쪽에 추가
       let [x, y] = commands[i].split(' ');
       string1.push(y); // 왼쪽 영역에 값 추가

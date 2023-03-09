@@ -25,7 +25,6 @@ function parenthesisCheck(parenthesis) {
     if (x === '(') stack.push('('); // 왼쪽 괄호일 때는 비교할 필요 없으니 무조건 push
     else {
       if (stack[stack.length-1] === '(') stack.pop(); // 스택 마지막 값이 (이면 yes
-      else if (stack[stack.length-1] === ')' || stack.length === 0) return 'NO'; // 스택에 값 없거나 마지막 값이 )이면 no
       else continue;
     } 
   }
