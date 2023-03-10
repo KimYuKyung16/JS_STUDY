@@ -1,15 +1,15 @@
 function solution(n, left, right) {
   let answer = [];
-  let count = 0;
+  let count = 0; // 최종 1차원 배열 안에 들은 값들의 개수
   
-  let x = parseInt(left/n);
-  let y = left%n;
+  let x = parseInt(left/n); // left값의 x좌표
+  let y = left%n; // left값의 y좌표
 
   while (count !== (right-left+1)) {        
-      answer.push(x>y ? x+1 : y+1);        
-      if (y === n-1) {
+      answer.push(x>y ? x+1 : y+1); // x, y좌표 중 더 큰 값이 해당 인덱스의 값과 같음. -> 규칙적
+      if (y === n-1) { // y좌표값이 오른쪽끝까지 도달했을 때 x값을 증가 시킴.
           x++;
-          y = 0;
+          y = 0; // y좌표는 0으로 초기화시켜서 처음부터 확인시킴.
       } else y++;
       count++;
   }

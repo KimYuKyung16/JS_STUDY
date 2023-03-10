@@ -1,27 +1,23 @@
 function solution(progresses, speeds) {
-  var answer = [];
+    let answer = [];
 
-  while(speeds.length > 0) {
-      // 개발
-      for(let i in speeds) {
-          if(progresses[i] < 100) {
-              progresses[i] += speeds[i];
-          }
-      }
+    while (speeds.length > 0) {
+        // 개발
+        for(let i in speeds) { // 각 기능들에 진도율 +
+            if (progresses[i] < 100)  progresses[i] += speeds[i];
+        }
 
-      // 배포
-      let deploy_count = 0;
-      while(progresses[0] >= 100) {
-          progresses.shift();
-          speeds.shift();
-          deploy_count++;
-      }
-      if(deploy_count > 0) {
-          answer.push(deploy_count);
-      }
-  }
+        // 배포
+        let deploy_count = 0; // 배포되는 기능 개수
+        while (progresses[0] >= 100) { // 제일 첫 번째 값이 100 이상이면 배포 가능
+            progresses.shift();
+            speeds.shift();
+            deploy_count++;
+        }
+        if(deploy_count > 0) answer.push(deploy_count); // 한 개 이상 배포 가능하면 answer에 추가
+    }
 
-  return answer;
+    return answer;
 }
 
 /*

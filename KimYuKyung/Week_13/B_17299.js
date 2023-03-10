@@ -6,13 +6,13 @@ let answer = [];
 
 let count = new Array(Math.max(...input)).fill(0);
 
-for (let i=0; i<input.length; i++) {
+for (let i=0; i<input.length; i++) { // 등장한 횟수들
   count[input[i]-1]++;
 }
 
 for (let i=input.length-1; i>=0; i--) {
   if (stack.length === 0) {
-    stack.push([input[i], count[input[i]-1]]);
+    stack.push([input[i], count[input[i]-1]]); // 값과 등장한 횟수를 함께 배열화해서 push 
     answer.push(-1);
   } else {
     while(true) {
