@@ -36,24 +36,24 @@ size():스택에 들어 있는 요소의 개수 반환
 
 ```js
 class Stack {
-  constructor() {
-    this._arr = [];
-  }
-  push(item) {
-    this._arr.push(item);
-  }
-  pop() {
-    return this._arr.pop();
-  }
-  peek() {
-    return this._arr[this._arr.length - 1];
-  }
-  is_empty() {
-    return this.size() === 0;
-  }
-  size() {
-    return this._arr.length;
-  }
+    constructor() {
+        this._arr = [];
+    }
+    push(item) {
+        this._arr.push(item);
+    }
+    pop() {
+        return this._arr.pop();
+    }
+    peek() {
+        return this._arr[this._arr.length - 1];
+    }
+    is_empty() {
+        return this.size() === 0;
+    }
+    size() {
+        return this._arr.length;
+    }
 }
 
 const stack = new Stack();
@@ -91,56 +91,56 @@ stack.pop(); // 3
 
 ## 1. 선형 큐
 
-- 특징
+-   특징
 
 선형 큐에서는 rear가 배열 크기와 같아지면 큐가 꽉 찼다고 판단하며, front와 rear가 동일한 위치를 가리키면 큐가 비었다고 판단한다.
 
   <img width="100%" src="https://user-images.githubusercontent.com/68090939/139860059-d2beccc3-ff14-4d28-84d0-225a11f022b8.png" />
 
-- 문제점
+-   문제점
 
 선형 큐는 원소 삭제 시 앞에서부터 공간이 남게 되는데, 이때 뒤의 원소들을 앞으로 당겨주지 않으면 빈 공간이 많이 남아 있음에도 불구하고 더 이상 원소를 추가하지 못하는 문제가 발생할 수 있다. 그렇다고 삭제 연산이 일어날 때마다 원소들을 한칸씩 앞으로 당기기에는 매우 비효율적이다.
 
-- 코드 구현
+-   코드 구현
 
 출처: https://hokeydokey.tistory.com/31
 
 ```js
 class queueType {
-  constructor(size) {
-    this.maxSize = size;
-    this.front = -1;
-    this.rear = -1;
-    this.array = [];
-  }
-  enque(item) {
-    if (this.rear != this.maxSize - 1) {
-      this.array[++this.rear] = item;
-    } else {
-      console.log(new Error("queue is full"));
+    constructor(size) {
+        this.maxSize = size;
+        this.front = -1;
+        this.rear = -1;
+        this.array = [];
     }
-  }
+    enque(item) {
+        if (this.rear != this.maxSize - 1) {
+            this.array[++this.rear] = item;
+        } else {
+            console.log(new Error("queue is full"));
+        }
+    }
 
-  deque() {
-    if (this.front == this.rear) {
-      console.log(new Error("queue is empty"));
-    } else {
-      ++this.front;
-      return this.array[this.front];
+    deque() {
+        if (this.front == this.rear) {
+            console.log(new Error("queue is empty"));
+        } else {
+            ++this.front;
+            return this.array[this.front];
+        }
     }
-  }
 
-  print() {
-    let string = "";
-    for (let i = 0; i < this.maxSize; i++) {
-      if (this.front >= i || i > this.rear) {
-        string += " | ";
-      } else {
-        string += `${this.array[i]} | `;
-      }
+    print() {
+        let string = "";
+        for (let i = 0; i < this.maxSize; i++) {
+            if (this.front >= i || i > this.rear) {
+                string += " | ";
+            } else {
+                string += `${this.array[i]} | `;
+            }
+        }
+        console.log(string);
     }
-    console.log(string);
-  }
 }
 
 let queue = new queueType(5);
@@ -157,66 +157,66 @@ queue.print();
 
 ## 2. 원형 큐
 
-- 특징
+-   특징
 
 원형큐는 선형큐와 달리 원형의 모양을 하고 있으며 이 queue의 공간에 아이템이 꽉 차지 않는 이상 언제든 enque와 deque를 할 수 있다.
 
   <img width="100%" src="https://user-images.githubusercontent.com/68090939/139867077-dc03fcc2-cac8-4dca-ba5d-f95ad41da386.png" />
   <img width="100%" src="https://user-images.githubusercontent.com/68090939/139866819-d2463717-66c4-4b64-9c3c-dbe5973a5196.png" />
 
-- 코드 구현
+-   코드 구현
 
 출처: https://hokeydokey.tistory.com/37
 
 ```js
 class CircleQueue {
-  constructor(size) {
-    this.maxQueueSize = size;
-    this.array = [];
-    this.front = 0;
-    this.rear = 0;
-  }
-
-  isEmpyt() {
-    return this.front == this.rear;
-  }
-
-  isFull() {
-    return (this.rear + 1) % this.maxQueueSize == this.front;
-  }
-  enQueue(item) {
-    if (this.isFull()) {
-      console.log(new Error("큐가 포화상태입니다."));
-    } else {
-      this.rear = (this.rear + 1) % this.maxQueueSize;
-      this.array[this.rear] = item;
+    constructor(size) {
+        this.maxQueueSize = size;
+        this.array = [];
+        this.front = 0;
+        this.rear = 0;
     }
-  }
 
-  deQueue() {
-    if (this.isEmpyt()) {
-      console.log(new Error("큐가 비었습니다."));
-    } else {
-      this.front = (this.front + 1) % this.maxQueueSize;
-      return this.array[this.front];
+    isEmpyt() {
+        return this.front == this.rear;
     }
-  }
 
-  print() {
-    if (this.isEmpyt()) {
-      console.log(new Error("큐가 비었습니다."));
+    isFull() {
+        return (this.rear + 1) % this.maxQueueSize == this.front;
     }
-    let string = "";
-    let i = this.front;
-    do {
-      i = (i + 1) % this.maxQueueSize;
-      string += this.array[i] + "|";
-      if (i == this.rear) {
-        console.log(string);
-        break;
-      }
-    } while (i != this.front);
-  }
+    enQueue(item) {
+        if (this.isFull()) {
+            console.log(new Error("큐가 포화상태입니다."));
+        } else {
+            this.rear = (this.rear + 1) % this.maxQueueSize;
+            this.array[this.rear] = item;
+        }
+    }
+
+    deQueue() {
+        if (this.isEmpyt()) {
+            console.log(new Error("큐가 비었습니다."));
+        } else {
+            this.front = (this.front + 1) % this.maxQueueSize;
+            return this.array[this.front];
+        }
+    }
+
+    print() {
+        if (this.isEmpyt()) {
+            console.log(new Error("큐가 비었습니다."));
+        }
+        let string = "";
+        let i = this.front;
+        do {
+            i = (i + 1) % this.maxQueueSize;
+            string += this.array[i] + "|";
+            if (i == this.rear) {
+                console.log(string);
+                break;
+            }
+        } while (i != this.front);
+    }
 }
 
 let queue = new CircleQueue(5);
@@ -232,7 +232,94 @@ queue.print();
 ```
 
 </details>
+<details>
+<summary style="font-size: 25px">🔛Deque</summary>
 
+# :star:정의
+
+double-ended queue의 줄임말로서 큐의 전단(front)과 후단(rear)에서 모두 삽입과 삭제가 가능한 큐를 의미한다.
+
+# :star:특징
+
+### 1. 삽입 삭제가 양방향에서 자유롭다. stack과 queue를 합쳐 놓은 것과 비슷함.
+
+<img width="100%" src="https://blog.kakaocdn.net/dn/m8ZLL/btq2MvSwR3H/bO8V57NsMOxzJ0uWtkwAB0/img.png" />
+
+# :star:추상 자료형
+
+스택의 핵심 연산
+
+```
+add_front(e): 주어진 요소e를 덱의 맨 앞에 추가한다.
+delete_front(): 전단 요소를 삭제하고 반환한다.
+add_rear(e): 주어진 요소도 e를 덱의 맨 뒤에 추가한다.
+delete_rear(): 후단 요소를 삭제하고 반환한다.
+get_front(): 전단 요소를 삭제하지 않고 반환한다.
+get_rear(): 후단 요소를 삭제하지 않고 반환한다.
+is_empty(): 공백 상태이면 True를 아니면 False를 반환한다.
+is_full(): 덱이 가득 차 있으면 True를 아니면 False를 반환한다.
+size(): 덱 내의 모든 요소들의 개수를 반환한다.
+```
+
+# :star:구현
+
+```js
+class Deque {
+    constructor() {
+        this.arr = [];
+        this.head = 0;
+        this.tail = 0;
+    }
+    push_front(item) {
+        if (this.arr[0]) {
+            for (let i = this.arr.length; i > 0; i--) {
+                this.arr[i] = this.arr[i - 1];
+            }
+        }
+        this.arr[this.head] = item;
+        this.tail++;
+    }
+    push_back(item) {
+        this.arr[this.tail++] = item;
+    }
+    pop_front() {
+        if (this.head >= this.tail) {
+            return null;
+        } else {
+            const result = this.arr[this.head++];
+            return result;
+        }
+    }
+    pop_back() {
+        if (this.head >= this.tail) {
+            return null;
+        } else {
+            const result = this.arr[--this.tail];
+            return result;
+        }
+    }
+}
+
+let deque = new Deque();
+deque.push_front(1); // arr: [1] head: 0 tail: 1
+deque.push_front(2); // arr: [2, 1] head: 0 tail: 2
+console.log(deque.pop_front()); // 2, head: 1 tail: 2
+deque.push_front(3); // arr: [2, 3, 1] head: 1 tail: 3
+console.log(deque.pop_front()); // 3, head: 2 tail: 3
+console.log(deque.pop_front()); // 1, head: 3 tail: 3
+console.log(deque.pop_front()); // null
+deque.push_back(5); // arr: [5] head: 3 tail: 4
+// 실제 배열 출력은 arr: [2, 3, 1, 5] 이지만 배열 요소 2, 3, 1은 pop_front()를 하였기에 shift()가 된 요소로 생각할 수 있다.
+console.log(deque.pop_back()); // 5, head: 3 tail: 3
+console.log(deque.pop_back()); // null
+deque.push_back(6); // arr: [6] head: 3 tail: 4
+// 실제 배열 출력은 arr: [2, 3, 1, 6] 이지만 배열 요소 2, 3, 1 은 pop_front()를 하였기에 shift()가 된 요소로, 배열 요소 5는 pop_back()을 실행해서 pop()가 된 요소로 생각할 수 있다.
+deque.push_front(9); // arr: [9, 6] head: 3 tail: 5
+```
+
+[출처] https://soft.plusblog.co.kr/24
+
+</details>
 <details>
 <summary style="font-size: 25px">🌻LinkedList (연결리스트)</summary>
 
@@ -260,28 +347,28 @@ queue.print();
 
 한 방향으로만 이동할 수 있는 리스트를 말한다.
 
-- 단방향 연결리스트 형태
-  <img width="100%" src="https://user-images.githubusercontent.com/81006438/222418142-e7587a06-46d7-4fe7-9383-cc8df25fdd2b.png" />
+-   단방향 연결리스트 형태
+    <img width="100%" src="https://user-images.githubusercontent.com/81006438/222418142-e7587a06-46d7-4fe7-9383-cc8df25fdd2b.png" />
 
-  한 노드에 데이터와 포인터가 있는데 이 포인터는 다음 값의 주소이다.
+    한 노드에 데이터와 포인터가 있는데 이 포인터는 다음 값의 주소이다.
 
-- 단방향 연결리스트에서 데이터 추가
-  <img width="100%" src="https://user-images.githubusercontent.com/81006438/222418144-0768eb7e-948b-4b46-b2ec-803c78daf8cb.png" />
+-   단방향 연결리스트에서 데이터 추가
+    <img width="100%" src="https://user-images.githubusercontent.com/81006438/222418144-0768eb7e-948b-4b46-b2ec-803c78daf8cb.png" />
 
-  새로 추가하려는 위치에서 왼쪽에 있는 노드가 가리키는 주소값을 바꾼다.
-  새로 추가하는 노드에서도 가리키는 주소값을 다음 노드로 설정한다.
+    새로 추가하려는 위치에서 왼쪽에 있는 노드가 가리키는 주소값을 바꾼다.
+    새로 추가하는 노드에서도 가리키는 주소값을 다음 노드로 설정한다.
 
-- 단방향 연결리스트에서 데이터 삭제
-  <img width="100%" src="https://user-images.githubusercontent.com/81006438/222418130-9dec3f67-9603-4aae-8df7-861ca31f1229.png" />
+-   단방향 연결리스트에서 데이터 삭제
+    <img width="100%" src="https://user-images.githubusercontent.com/81006438/222418130-9dec3f67-9603-4aae-8df7-861ca31f1229.png" />
 
-  삭제하려는 노드와의 양 옆 연결을 제거한다.
-  이전 노드가 가리키는 주소가 삭제할 노드를 가리키게 하지 않고 그 다음 노드를 가리키도록 바꿔준다.
+    삭제하려는 노드와의 양 옆 연결을 제거한다.
+    이전 노드가 가리키는 주소가 삭제할 노드를 가리키게 하지 않고 그 다음 노드를 가리키도록 바꿔준다.
 
 ## 2. 양방향 연결리스트
 
 양 방향으로 이동할 수 있는 리스트를 말한다.
 
-- 양방향 연결리스트 형태
+-   양방향 연결리스트 형태
 
 ```
 
@@ -290,7 +377,7 @@ queue.print();
 
 ```
 
-- 양방향 연결리스트에서 데이터 추가
+-   양방향 연결리스트에서 데이터 추가
 
 ```
 
@@ -299,7 +386,7 @@ queue.print();
 
 ```
 
-- 양방향 연결리스트에서 데이터 삭제
+-   양방향 연결리스트에서 데이터 삭제
 
 ```
 
@@ -333,64 +420,64 @@ queue.print();
 
 ```js
 class Node {
-  constructor(element) {
-    this.element = element;
-    this.next = null;
-  }
+    constructor(element) {
+        this.element = element;
+        this.next = null;
+    }
 }
 
 class LinkedList {
-  constructor() {
-    this.head = new Node("head");
-  }
-
-  append(newElement) {
-    let newNode = new Node(newElement); //새로운 노드 생성
-    let current = this.head; // 시작 노드
-    while (current.next != null) {
-      // 맨 끝 노드 찾기
-      current = current.next;
+    constructor() {
+        this.head = new Node("head");
     }
-    current.next = newNode;
-  }
 
-  insert(newElement, item) {
-    let newNode = new Node(newElement); //새로운 노드 생성
-    let current = this.find(item); // 삽입할 위치의 노드 찾기
-    newNode.next = current.next; // 찾은 노드가 가리키는 노드를 새로은 노드가 가리키기
-    current.next = newNode; // 찾은 노드는 이제부터 새로운 노드를 가리키도록 하기
-  }
-
-  remove(item) {
-    let preNode = this.findPrevious(item); // 삭제할 노드를 가리키는 노드 찾기
-    preNode.next = preNode.next.next; // 삭제할 노드 다음 노드를 가리키도록 하기
-  }
-
-  find(item) {
-    let currNode = this.head;
-    while (currNode.element !== item) {
-      currNode = currNode.next;
+    append(newElement) {
+        let newNode = new Node(newElement); //새로운 노드 생성
+        let current = this.head; // 시작 노드
+        while (current.next != null) {
+            // 맨 끝 노드 찾기
+            current = current.next;
+        }
+        current.next = newNode;
     }
-    return currNode;
-  }
 
-  findPrevious(item) {
-    let currNode = this.head;
-    while (currNode.next != null && currNode.next.element !== item) {
-      currNode = currNode.next;
+    insert(newElement, item) {
+        let newNode = new Node(newElement); //새로운 노드 생성
+        let current = this.find(item); // 삽입할 위치의 노드 찾기
+        newNode.next = current.next; // 찾은 노드가 가리키는 노드를 새로은 노드가 가리키기
+        current.next = newNode; // 찾은 노드는 이제부터 새로운 노드를 가리키도록 하기
     }
-    return currNode;
-  }
 
-  toString() {
-    let array = [];
-    let currNode = this.head;
-    while (currNode.next !== null) {
-      array.push(currNode.next.element);
-      currNode = currNode.next;
+    remove(item) {
+        let preNode = this.findPrevious(item); // 삭제할 노드를 가리키는 노드 찾기
+        preNode.next = preNode.next.next; // 삭제할 노드 다음 노드를 가리키도록 하기
     }
-    return array;
-  }
+
+    find(item) {
+        let currNode = this.head;
+        while (currNode.element !== item) {
+            currNode = currNode.next;
+        }
+        return currNode;
+    }
+
+    findPrevious(item) {
+        let currNode = this.head;
+        while (currNode.next != null && currNode.next.element !== item) {
+            currNode = currNode.next;
+        }
+        return currNode;
+    }
+
+    toString() {
+        let array = [];
+        let currNode = this.head;
+        while (currNode.next !== null) {
+            array.push(currNode.next.element);
+            currNode = currNode.next;
+        }
+        return array;
+    }
 }
 
 let linkedList = new LinkedList();
