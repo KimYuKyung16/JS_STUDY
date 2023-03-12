@@ -3,7 +3,7 @@ let sticks= [];         // 중첩된 막대기의 개수
 let answer=0;
 
 for(let i=0;i<input.length;i++){
-    const string = input[i];
+    const string = input[i];        //여는 괄호인지 닫는 괄호인지 확인
     if(string === '('&& input[i+1]===")"){      // "()":레이저가 쏴지면 중첩된 막대기 개수만큼 annswer증가
         answer+=sticks.length;
         i+=1;       // 한칸 건너뛰기
