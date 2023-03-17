@@ -1,24 +1,19 @@
 function solution(priorities, location) {
-  let answer = 0;
-  let index = 0;
-  
-  priorities = priorities.map((value, index) => [index, value]);
-  
-  while(1) {
-     let first_val = priorities.shift();
-      
-      if (Math.max(...priorities.map((value) => { return value[1] })) > first_val[1]) {
-          priorities.push(first_val);
-      } else {
-          index ++;
-          if (first_val[0] == location) {
-              answer = index;
-              break;
-          }
-      } 
-  }
-  
-  return answer;
+    let index = 0; // 인쇄되는 순서
+    
+    priorities = priorities.map((value, index) => [index, value]); // 위치 추가 (위치, 중요도)
+    
+    while(1) {
+       let first_val = priorities.shift();
+        
+        if (Math.max(...priorities.map((value) => { return value[1] })) > first_val[1]) { // first_val의 중요도가 더 낮을 경우
+            priorities.push(first_val); // 맨 마지막으로 보내기
+        } else {
+            index ++;
+            if (first_val[0] == location) return index;  // 해당 위치가 일치할 경우
+        } 
+    }
+    
 }
 
 /*

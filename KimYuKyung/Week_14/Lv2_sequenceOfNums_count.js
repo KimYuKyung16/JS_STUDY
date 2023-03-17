@@ -3,20 +3,20 @@ function solution(elements) {
     
     for (let i=1; i<elements.length; i++) {
         for (let j=0; j<elements.length; j++) {
-            let sum = 0;
+            let sum = 0; // 수열 합
             
-            if (j+i > elements.length) {
-                sum += elements.slice(j, elements.length).reduce((acc, cur) => acc + cur, 0);    
-                sum += elements.slice(0, j+i-elements.length).reduce((acc, cur) => acc + cur, 0);    
-            } else {
-                sum = elements.slice(j, j+i).reduce((acc, cur) => acc + cur, 0);    
+            if (j+i > elements.length) { // 원형을 넘어갈 경우
+                sum += elements.slice(j, elements.length).reduce((acc, cur) => acc + cur, 0); // 원형 넘어가기 전    
+                sum += elements.slice(0, j+i-elements.length).reduce((acc, cur) => acc + cur, 0); // 원형 넘어간 후
+            } else { // 원형을 넘어가지않을 경우
+                sum = elements.slice(j, j+i).reduce((acc, cur) => acc + cur, 0); // 원형 안에서 자르기
             }
             answer.push(sum);
         }    
     }
     
-    answer.push(elements.reduce((acc, cur) => acc + cur, 0));
-    answer = [...new Set(answer)];
+    answer.push(elements.reduce((acc, cur) => acc + cur, 0)); // elements 개수랑 합할 개수가 같을 경우는 비교할 필요x
+    answer = [...new Set(answer)]; // 중복 제거
     return answer.length;
 }
 

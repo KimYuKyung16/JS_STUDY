@@ -6,19 +6,19 @@ let expression = input[1];
 expression = expression.split('');
 
 let stack = [];
-let nums = {};
-let numIndex = 2;
+let nums = {}; // ex) {A: 1}
+let numIndex = 2; // 영문자와 해당하는 값을 찾기 위해 필요
 
 for (let i=0; i<expression.length; i++) {
-  if (/[A-Z]/.test(expression[i])) {
-    if (nums[expression[i]] === undefined) {
-      nums[expression[i]] = input[numIndex];
-      stack.push(Number(input[numIndex]));
+  if (/[A-Z]/.test(expression[i])) { // 영문자일 경우
+    if (nums[expression[i]] === undefined) { // 객체에 값 없을 경우
+      nums[expression[i]] = input[numIndex]; 
+      stack.push(Number(input[numIndex])); // 객체에 값 넣기
       numIndex++;
-    } else {
-      stack.push(Number(nums[expression[i]]));
+    } else { // 값 있을 경우
+      stack.push(Number(nums[expression[i]])); // 객체에서 해당 값 찾아서 PUSH
     }
-  } else {
+  } else { // 영문자가 아닐 경우 : 연산자
     let second = stack.pop();
     let first = stack.pop();
     if (expression[i] === '+') stack.push(first + second);
