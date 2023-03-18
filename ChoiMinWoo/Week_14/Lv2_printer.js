@@ -1,16 +1,23 @@
 function solution(priorities, location) {
     let answer = 0;
+    //index 포함하도록 배열 생성
     let array = priorities.map((a, i) => [i, a]);
-
+    //큰 순서로 정렬
     priorities = priorities.sort((a, b) => b - a);
 
     while (array.length) {
+        //가장 큰값 max
         let max = priorities[0];
+        //max보다 작으면 뒤로 옮김
         if (array[0][1] < max) {
             array.push(array.shift());
         } else {
+            //가장 큰 값일 때
+            //max값 변경을 위해
             priorities.shift();
+
             answer++;
+            //해당 index를 찾으면 return answer
             if (array.shift()[0] === location) {
                 return answer;
             }
