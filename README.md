@@ -516,7 +516,7 @@ console.log(linkedList.toString());
 
 ---
 
-## 1. DFS(깊이 우선 탐색)
+# 1. DFS(깊이 우선 탐색)
 
   <img width="100%" src="https://velog.velcdn.com/images%2Flucky-korma%2Fpost%2F30737a15-9adf-49a6-96a0-98c211cab1cc%2FR1280x0.gif" />
 
@@ -530,7 +530,7 @@ console.log(linkedList.toString());
 
 > > 검색 속도 자체는 너비 우선 탐색에 비해 느림
 
-## 2. BFS(너비 우선 탐색)
+# 2. BFS(너비 우선 탐색)
 
   <img width="100%" src="https://velog.velcdn.com/images%2Flucky-korma%2Fpost%2F2112183b-bfcd-427e-8072-c9dc983180ba%2FR1280x0-2.gif" />
 
@@ -541,7 +541,7 @@ console.log(linkedList.toString());
 >
 > > 두 노드 사이의 최단 경로를 찾고 싶을 때 사용
 
-## 3. DFS/BFS의 차이점
+# 3. DFS/BFS의 차이점
 
   <img width="100%" src="https://velog.velcdn.com/images%2Flucky-korma%2Fpost%2Fe2ef7ac3-14e6-42e7-a768-224c5f773e29%2FR1280x0-3.gif" />
 
@@ -562,7 +562,7 @@ console.log(linkedList.toString());
 
 > > 검색 대상 그래프가 엄청 큰 문제 -> DFS>BFS
 
-## 4. DFS/BFS 코드
+# 4. DFS/BFS 코드
 
 1. DFS코드
 
