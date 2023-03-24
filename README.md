@@ -639,3 +639,112 @@ console.log(BFS(graph, "A"));
 ```
 
 </details>
+
+
+
+
+
+<details>
+<summary style="font-size: 25px">😱완전탐색</summary>
+
+# 완전탐색
+
+가능한 모든 경우의 수를 다 체크해서 정답을 찾는 방법이다.
+
+## :star:완전탐색 종류
+
+### - [Brute Force 기법](#1-brute-force-기법)
+### - [Permutation (순열)](#2-permutation-순열)
+### - [Recursive (재귀)](#3-recursive-재귀)
+### - [Bitmasking (비트마스크)](#4-bitmasking-비트마스크)
+### - [BFS, DFS](#5-bfs-dfs)
+
+## :star:완전탐색 코드 구현
+
+### - [완전탐색 코드](#6-완전탐색-코드-구현)
+
+---
+
+## 1. Brute Force 기법
+반복/조건문을 활용하여 모든 가능한 경우의 수를 확인하는 것을 말한다.
+
+## 2. Permutation (순열)
+> 🧐순열이란? 서로 다른 n개중에 r개를 선택하는 경우의 수를 말한다. 
+- 순열은 순서가 상관이 있기 때문에 순서가 중요하다!
+- N개의 데이터를 순열로 나타낸다면 전체 순열의 가지 수는 N!개가 된다.
+
+## 3. Recursive (재귀)
+> 🧐재귀란? 자기 자신을 호출하는 것을 말한다.
+* 주의할 점
+  1. 현재 함수의 상태를 저장하는 parameter와 재귀를 탈출하기 위한 탈출 조건이 필요
+  2. return문을 명확하게 정의
+
+## 4. Bitmasking (비트마스크)
+비트(bit) 연산을 통해서 부분 집합을 표현하는 것을 말한다.
+```
+1. And(&) : 둘 다 1이면 1
+2. OR(|) : 둘 중 1개만 1이면 1
+3. NOT(~) : 1이면 0, 0이면 1
+4. XOR(^) : 둘의 관계가 다르면 1, 같으면 0
+5. Shift(<<, >>) : A << B라고 한다면 A를 좌측으로 B 비트만큼 밀기.
+```
+* 비트마스크를 사용하는 이유
+  1. 배열 활용만으로 해결할 수 없는 문제를 해결할 수 있다.
+  2. 적은 메모리와 빠른 수행시간으로 문제 해결이 가능하다. (원소의 수는 많지 않아야 한다.)
+  3. 집합을 배열의 인덱스로 표현할 수 있다.
+  4. 코드가 간결해진다.
+
+## 5. BFS, DFS
+그래프 자료구조에서 모든 노드를 탐색하기 위한 방법이다.
+> BFS: 너비 우선 탐색
+
+> DFS: 깊이 우선 탐색
+
+[BFS, DFS 자세히 알아보기](#⭐dfsbfs-정의)
+
+## 6. 완전탐색 코드 구현
+출처 
+- https://snakehips.tistory.com/159
+- https://hongjw1938.tistory.com/78
+
+  <details>
+    <summary style="font-size: 15px">순열 관련 코드</summary>
+
+    ```js
+    const getPermutations = function (arr, selectNumber) {
+      const results = [];
+      if (selectNumber === 1)
+      return arr.map((value) => [value]);  // 1개씩 택할 때, 바로 모든 배열의 원소 return
+
+      arr.forEach((fixed, index, origin) => {
+        const rest = [...origin.slice(0, index), ...origin.slice(index + 1)];  // 해당하는 fixed를 제외한 나머지 배열
+        const permutations = getPermutations(rest, selectNumber - 1);  // 나머지에 대해 순열을 구한다.
+        const attached = permutations.map((permutation) => [fixed, ...permutation]);
+        // 돌아온 순열에 대해 떼 놓은(fixed) 값 붙이기
+        results.push(...attached);  // 배열 spread syntax 로 모두다 push
+      });
+
+      return results;  // 결과 담긴 results return
+    };
+
+    const arr = [1, 2, 3, 4];
+    const result = getPermutations(arr, 3);
+    console.log(result);
+    // => [
+    //   [ 1, 2, 3 ], [ 1, 2, 4 ],
+    //   [ 1, 3, 2 ], [ 1, 3, 4 ],
+    //   [ 1, 4, 2 ], [ 1, 4, 3 ],
+    //   [ 2, 1, 3 ], [ 2, 1, 4 ],
+    //   [ 2, 3, 1 ], [ 2, 3, 4 ],
+    //   [ 2, 4, 1 ], [ 2, 4, 3 ],
+    //   [ 3, 1, 2 ], [ 3, 1, 4 ],
+    //   [ 3, 2, 1 ], [ 3, 2, 4 ],
+    //   [ 3, 4, 1 ], [ 3, 4, 2 ],
+    //   [ 4, 1, 2 ], [ 4, 1, 3 ],
+    //   [ 4, 2, 1 ], [ 4, 2, 3 ],
+    //   [ 4, 3, 1 ], [ 4, 3, 2 ]
+    // ]
+    ```
+  </details>
+
+</details>
