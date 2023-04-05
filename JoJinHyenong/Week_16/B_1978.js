@@ -7,7 +7,7 @@ for(let x of array){
     }
     else{
         let sosu=0;     // 나누어 떨어지면 증가
-        for(let i=2;i<Math.sqrt(x);i++){
+        for(let i=2;i<=Math.sqrt(x);i++){
             if(x%i===0) {
                 sosu++;
             }
@@ -18,3 +18,8 @@ for(let x of array){
     }
 }
 console.log(answer)
+
+/*
+메모리: 9364 KB
+시간: 124 ms
+*/
