@@ -13,7 +13,7 @@ dp[1] = 1;
 for (let i=2; i<=N; i++) {
   let currentMax = 0;
   for (let j=1; j<i; j++) {
-    if (A[j] < A[i]) {
+    if (A[j] < A[i]) { // A[i]가 더 클 때가 증가하는 경우
       currentMax = Math.max(currentMax, dp[j]);
     }
   }
