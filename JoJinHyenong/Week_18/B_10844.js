@@ -16,7 +16,7 @@ for (let n = 3; n <= input; n++) {
     }
   }
 }
-let sum = 0;        //
+let sum = 0;
 for (let j = 0; j < 10; j++) {
   sum += dp[input][j];
 }

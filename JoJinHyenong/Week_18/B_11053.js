@@ -1,6 +1,6 @@
 let input = require('fs').readFileSync('example.txt').toString().split("\n");
 
-const len = Number(input[0]);     //6
+const len = Number(input[0]);     
 input.shift();
 input = input[0].split(" ").map((item) => Number(item));
 
