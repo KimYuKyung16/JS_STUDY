@@ -1,10 +1,32 @@
-function solution(numbers) {
-    const a = numbers
-        .map((a) => a + "")
-        .sort((a, b) => b + a - (a + b))
-        .join("");
-    return a[0] === "0" ? "0" : a;
+function solution(x, y, n) {
+  let dp = new Array(1).fill(x);
+  console.log(dp);
+
+  let answer = 0;
 }
+
+// function solution(x, y, n) {
+//     let answer = -1;
+//     let count=0;
+//     function bfs(x,count) {
+//         if(x===y){
+//             if(answer===-1){
+//                 answer=count
+//             }else {
+//                 if(answer>count) answer=count
+//             }
+//         }else if(x>y){
+//             return
+//         }else {
+//             bfs(x+n,count+1)
+//             bfs(x*2,count+1)
+//             bfs(x*3,count+1)
+//         }
+//     }
+//     bfs(x,count)
+//     return answer;
+// }
+
 /*
 정확성  테스트
 테스트 1 〉	통과 (142.14ms, 43.3MB)
