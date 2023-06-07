@@ -10,9 +10,13 @@ let arr = Array(n)
   .fill()
   .map((v, i) => i + 1);
 let selected = [];
+
 let answer = "";
+
 dfs(arr, 0);
+
 console.log(answer);
+
 function dfs(arr, dep) {
   if (dep === m) {
     let result = [];

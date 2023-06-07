@@ -9,11 +9,11 @@ const [n, m] = fs
 let arr = new Array(n).fill().map((a, i) => i + 1);
 let answer = "";
 let nums = [];
-dfs(arr, 0);
+dfs(arr, 0, 0);
 console.log(answer);
-function dfs(arr, start) {
+function dfs(arr, dep, start) {
   let result = [];
-  if (nums.length === m) {
+  if (dep === m) {
     for (let i = 0; i < nums.length; i++) result.push(arr[nums[i]]);
     for (let i = 0; i < result.length; i++) answer += result[i] + " ";
     answer += "\n";
@@ -21,7 +21,7 @@ function dfs(arr, start) {
   }
   for (let i = start; i < arr.length; i++) {
     nums.push(i);
-    dfs(arr, i);
+    dfs(arr, dep + 1, i);
     nums.pop();
   }
 }
