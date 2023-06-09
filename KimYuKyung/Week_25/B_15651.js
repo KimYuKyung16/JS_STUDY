@@ -5,6 +5,7 @@ let answer = [];
 
 dfs([], 0);
 
+// 같은 수를 중복으로 고를 수 있기 때문에 방문 처리 제거
 function dfs(array, count) {
   if (count === M) {
     answer.push(array.join(' '));

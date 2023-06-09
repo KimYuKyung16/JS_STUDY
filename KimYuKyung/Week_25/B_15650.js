@@ -14,7 +14,7 @@ function dfs(array, count) {
   for (let i=1; i<=N; i++) {
     if (visited[i] === 0) {
       let narray = [...array];
-      if (i < narray[narray.length-1]) continue;
+      if (i < narray[narray.length-1]) continue; // 오름차순 만들기 위해 왼쪽 값이 더 작을 경우 제외
       narray.push(i);
 
       visited[i] = 1;

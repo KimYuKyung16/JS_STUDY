@@ -21,7 +21,7 @@ function dfs(array, count) {
 
       visited[i] = 1;
       dfs(narray, count+1);
-      visited[i] = 0;
+      visited[i] = 0; // i 증가하고 다시 for문 돌 때 1~N까지 다시 돌아야하기 때문에 0으로
     }
   }
 }
