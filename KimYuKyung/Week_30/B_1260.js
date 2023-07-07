@@ -21,42 +21,38 @@ for (let i=1; i<array.length; i++) {
 }
 
 let dfs_array = [];
-let state = new Array(n+1).fill(1);
+let state = new Array(n+1).fill(0);
 
 function dfs(index) {
   if (!state[index]) return;
-  state[index] = 0;
+  state[index] = 1;
   dfs_array.push(index);
   for (let i=0; i<array[index].length; i++) {
     let next = array[index][i];
-    if (state[next] === 1) {
+    if (state[next] === 0) {
       dfs(next);
     }
   }
 }
-
 dfs(v);
 
 let bfs_array = [];
-state.fill(1);
+state.fill(0);
 function bfs(index) {
   let queue = [index];
   while (queue.length) {
     let x = queue.shift();
-    if (state[x] === 0) {
-      continue;
-    }
-    state[x] = 0;
+    if (state[x] === 1) continue;
+    state[x] = 1;
     bfs_array.push(x);
     for (let i = 0; i < array[x].length; i++) {
       let next = array[x][i];
-      if (state[next] === 1) {
+      if (state[next] === 0) {
         queue.push(next);
       }
     }
   }
 }
-
 bfs(v);
 
 console.log(dfs_array.join(' '));
