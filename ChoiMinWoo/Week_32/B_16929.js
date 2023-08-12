@@ -8,9 +8,7 @@ let move = [
   [0, -1],
 ];
 const graph = [];
-let visited = [...Array(+n)]
-  .map(() => 0)
-  .map(() => [...Array(+m)].map(() => 0));
+let visited = new Array(+n).fill().map(() => new Array(+m).fill(0));
 let flag = 0;
 let start;
 for (let i = 0; i < arr.length; i++) {
@@ -18,6 +16,7 @@ for (let i = 0; i < arr.length; i++) {
 }
 
 for (let i = 0; i < n; i++) {
+  if (flag) break;
   for (let j = 0; j < m; j++) {
     start = [i, j];
     visited[i][j] = 1;
@@ -28,6 +27,7 @@ for (let i = 0; i < n; i++) {
 }
 flag ? console.log("Yes") : console.log("No");
 function dfs(x, y, k) {
+  if (flag) return;
   for (let i = 0; i < 4; i++) {
     let nx = x + move[i][0];
     let ny = y + move[i][1];
