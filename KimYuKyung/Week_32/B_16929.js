@@ -1,53 +1,55 @@
-const sol = (input) => {
-  const [N, M] = input[0].split(" ").map(Number);
-  const gameBoard = [];
-  for (let i = 1; i <= N; i++) gameBoard.push(input[i].split("")); // N x M 게임판
+const fs = require("fs");
+let input = fs.readFileSync("input.txt").toString().trim().split("\n");
+input = input.map((x) => x.trim("\r"));
 
-  const check = Array.from({ length: N }, () => Array(M).fill(0)); // 방문 여부를 조회할 배열
-  const dx = [-1, 0, 1, 0]; // 동서남북 좌표 이동
-  const dy = [0, 1, 0, -1];
-  let flag = 0; // 재귀 탈출을 위한 플래그
+const [N, M] = input.shift().split(" ").map(Number);
+let board = [];
+let answer = "No";
 
-  function dfs(x, y, cnt) {
-    if (flag) return;
+for (let i = 0; i < N; i++) {
+  board.push(input.shift());
+}
 
-    for (let i = 0; i < 4; i++) {
-      const [nx, ny] = [x + dx[i], y + dy[i]];
-      if (nx <= -1 || ny <= -1 || nx >= N || ny >= M) continue; // 게임판의 인덱스가 아니라면 패스
-      if (gameBoard[nx][ny] !== gameBoard[start.x][start.y]) continue; // 시작한 색과 다르다면 패스
-      if (!check[nx][ny]) { // 방문하지 않았다면 방문하고, 재귀가 끝나면 방문을 해제해 줘야 함.
-        check[nx][ny] = 1;
-        dfs(nx, ny, cnt + 1);
-        check[nx][ny] = 0;
-        continue;
-      } else if (cnt >= 4 && nx === start.x && ny === start.y) {
-        flag = 1; // 방문한 노드가 4개 이상, 이동하려는 좌표가 시작한 좌표라면 사이클이므로 재귀 탈출
+let visited = new Array(N).fill().map(() => new Array(M).fill(0));
+
+const dy = [-1, 0, 1, 0];
+const dx = [0, 1, 0, -1];
+
+for (let y = 0; y < N; y++) {
+  if (answer === "Yes") break;
+  for (let x = 0; x < M; x++) {
+    if (answer === "Yes") break;
+    visited[y][x] = board[y][x];
+    dfs([y, x], y, x, 1);
+    visited[y][x] = 0;
+  }
+}
+
+console.log(answer);
+
+function dfs(init, y, x, count) {
+  if (answer === "Yes") return;
+  for (let i = 0; i < 4; i++) {
+    let ny = y + dy[i];
+    let nx = x + dx[i];
+
+    if (ny < 0 || ny >= N || nx < 0 || nx >= M) continue;
+    if (board[ny][nx] !== visited[y][x]) continue;
+    if (visited[ny][nx] !== 0) {
+      if (count >= 4 && ny === init[0] && nx === init[1]) {
+        answer = "Yes";
         return;
+      } else {
+        continue;
       }
     }
+    visited[ny][nx] = board[ny][nx];
+    dfs(init, ny, nx, count + 1);
+    visited[ny][nx] = 0;
   }
+}
 
-  let start;
-  for (let x = 0; x < N; x++) {
-    for (let y = 0; y < M; y++) {
-      start = { x, y };
-      check[x][y] = 1; // (0,0) ~ (N-1,M-1)까지 조회해야 하므로 방문했다면 방문을 해제해줘야 한다.
-      dfs(x, y, 1);
-      check[x][y] = 0;
-      if (flag) break; // 사이클을 발견했다면 탈출한다.
-    }
-  }
-  return flag ? "Yes" : "No"; // 사이클을 발견했으면 Yes 리턴, 사이클이 없다면 No 리턴
-};
-
-// 백준에서 입력을 받기 위한 코드
-const input = [];
-require("readline")
-  .createInterface(process.stdin, process.stdout)
-  .on("line", (line) => {
-    input.push(line);
-  })
-  .on("close", () => {
-    console.log(sol(input));
-    process.exit();
-  });
+/*
+메모리: 10580 KB
+시간: 204 ms
+*/

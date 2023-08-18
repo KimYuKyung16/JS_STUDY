@@ -1,50 +1,49 @@
-let input = require("fs").readFileSync("/dev/stdin").toString().trim().split("\n");
+// BFS
+const fs = require("fs");
+let input = fs.readFileSync("input.txt").toString().trim().split("\n");
+input = input.map((x) => x.trim("\r"));
 
-let tc = Number(input[0]);
-let index = 1;
+const testcase = +input.shift();
 
-for (let i = 0; i < tc; i++) {
-  let board_size = Number(input[index]);
-  let board = new Array(board_size);
-  for (let j = 0; j < board.length; j++) {
-    board[j] = new Array(board_size).fill(0);
+const dy = [2, 2, 1, -1, -2, -2, -1, 1];
+const dx = [-1, 1, 2, 2, 1, -1, -2, -2];
+
+for (let i = 0; i < testcase; i++) {
+  const l = +input.shift();
+  const init = input.shift().split(" ").map(Number);
+  const destination = input.shift().split(" ").map(Number);
+
+  if (destination[0] === init[0] && destination[1] === init[1]) {
+    console.log(0);
+    continue;
   }
-  let start_x = Number(input[index + 1].split(" ")[0]);
-  let start_y = Number(input[index + 1].split(" ")[1]);
-  let end_x = Number(input[index + 2].split(" ")[0]);
-  let end_y = Number(input[index + 2].split(" ")[1]);
-  board[start_x][start_y] = 1;
-  function BFS() {
-    let L = 0;
-    let dx = [2, 2, -2, -2, 1, 1, -1, -1];
-    let dy = [1, -1, 1, -1, 2, -2, 2, -2];
-    let queue = [];
-    queue.push([start_x, start_y]);
-    while (queue.length) {
-      let len = queue.length;
-      for (let i = 0; i < len; i++) {
-        let v = queue.shift();
-        if (v[0] === end_x && v[1] === end_y) {
-          return L;
-        }
-        for (let i = 0; i < 8; i++) {
-          let nx = v[0] + dx[i];
-          let ny = v[1] + dy[i];
-          if (
-            nx >= 0 &&
-            nx < board_size &&
-            ny >= 0 &&
-            ny < board_size &&
-            board[nx][ny] === 0
-          ) {
-            board[nx][ny] = 1;
-            queue.push([nx, ny]);
-          }
-        }
+
+  bfs(init, l, destination);
+}
+
+function bfs(init, len, destination) {
+  let visited = new Array(len).fill().map(() => new Array(len).fill(0));
+  let queue = [init];
+
+  while (queue.length !== 0) {
+    const [cy, cx] = queue.shift();
+
+    for (let i = 0; i < dy.length; i++) {
+      const ny = cy + dy[i];
+      const nx = cx + dx[i];
+      if (ny >= len || ny < 0 || nx >= len || nx < 0) continue;
+      if (visited[ny][nx]) continue;
+      if (ny === destination[0] && nx === destination[1]) {
+        console.log(visited[cy][cx] + 1);
+        return;
       }
-      L++;
+      visited[ny][nx] = visited[cy][cx] + 1;
+      queue.push([ny, nx]);
     }
   }
-  console.log(BFS());
-  index += 3;
 }
+
+/*
+메모리: 30540 KB
+시간: 480 ms
+*/
