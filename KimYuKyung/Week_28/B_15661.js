@@ -19,6 +19,7 @@ for (let i=0; i<array.length; i++) {
 }
 
 function dfs(current, count) {
+  // 14889문제에서 count === N/2 조건만 뺴줌. - 팀을 절반으로 나눌 필요 없기 때문
   let left = 0;
   let right = 0;
   for (let y=0; y<N; y++) {

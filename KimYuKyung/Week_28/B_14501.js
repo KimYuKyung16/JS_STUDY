@@ -12,9 +12,11 @@ let dp = new Array(N).fill(0);
 dp[0] = 0;
 
 for (let i=0; i<dp.length; i++) {
-  if (i + array[i][0] > N) continue;
-  dp[i] += array[i][1];
+  // 현재 날짜에 상담에 걸리는 시간을 더했을 때가 퇴사일보다 크면 상담 불가능
+  if (i + array[i][0] > N) continue; 
+  dp[i] += array[i][1]; // 본인 날짜에 진행하는 상담비 더하기
   for (let j=i+array[i][0]; j<N; j++) {
+    // 본인 날짜에 진행하는 상담비와 그 다음에 받을 수 있는 상담비 비교?
     dp[j] = Math.max(dp[i], dp[j]);
   }
 }
