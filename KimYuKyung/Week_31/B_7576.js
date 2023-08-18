@@ -1,5 +1,6 @@
+// 최소날짜를 구하는 것이기 때문에 bfs 사용
 // 1인 애들의 좌표를 모두 넣어놓고 시작하기
-// queue.shift()하면 시간초과
+
 const fs = require('fs');
 let input = fs.readFileSync('input.txt').toString().trim().split('\n');
 input = input.map((x) => x.trim('\r'));
@@ -15,10 +16,10 @@ let queue = [];
 
 for (let y=0; y<N; y++) {
   for (let x=0; x<M; x++) {
-    if (array[y][x] === 1) {
+    if (array[y][x] === 1) { // 익어있는 토마토의 경우를 queue에 넣기
       queue.push([y, x]);
       visited[y][x] = 1;
-    } else if (array[y][x] === -1) {
+    } else if (array[y][x] === -1) { // 토마토가 없는 경우에는 방문 처리
       visited[y][x] = 1;
     }
   }
@@ -31,7 +32,7 @@ function bfs() {
   let q_index = 0;
   
   while(queue.length !== q_index) {
-    let [y, x] = queue[q_index];
+    let [y, x] = queue[q_index]; // queue.shift()하면 시간초과
 
     for (let i=0; i<4; i++) {
       let ny = y + dy[i];
@@ -47,9 +48,10 @@ function bfs() {
     q_index++;
   }
 
+  // 익을 수 없는 토마토 확인
   for (let y=0; y<N; y++) {
     for (let x=0; x<M; x++) {
-      if (visited[y][x] === 0) return -1;
+      if (visited[y][x] === 0) return -1; 
     }
   }
 

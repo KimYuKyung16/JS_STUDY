@@ -1,3 +1,5 @@
+// DFS로 풀면 시간초과나서 BFS로 품.
+
 const fs = require("fs");
 let input = fs.readFileSync("input.txt").toString().trim().split("\n");
 input = input.map((x) => x.trim("\r"));
@@ -27,7 +29,7 @@ function bfs() {
       let ny = y + direction[i][0];
       let nx = x + direction[i][1];
 
-      if (ny === N - 1 && nx === M - 1) {
+      if (ny === N - 1 && nx === M - 1) { // (N, M) 위치일 경우
         console.log(visited[y][x] + 1);
         return;
       }
